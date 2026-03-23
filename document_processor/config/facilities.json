@@ -1,0 +1,294 @@
+{
+  "baywood_court": {
+    "display_name": "Baywood Court Healthcare",
+    "display_names": [
+      "Baywood Court",
+      "Baywood Court Healthcare",
+      "Baywood Court Memory Care",
+      "Baywood Court Assisted Living"
+    ],
+    "overrides": [
+      "Form fields on this document use wide spacing between the label and the value — sometimes spanning the full width of the page. A label like 'SSN:' may have its value far to the right on the same line. Do not treat wide horizontal spacing as a field separator. Always scan the full width of each line after a field label to find the value."
+    ]
+  },
+  "bellaken": {
+    "display_name": "Bellaken Medical Center",
+    "display_names": [
+      "Bellaken",
+      "Bellaken Gardens",
+      "Bellaken Health Center",
+      "Bellaken Medical Center",
+      "Bellaken SNF"
+    ],
+    "overrides": []
+  },
+  "canyon_creek": {
+    "display_name": "Canyon Creek",
+    "display_names": [
+      "Canyon Creek",
+      "Canyon Creek Healthcare"
+    ],
+    "overrides": []
+  },
+  "canyon_creek_post_acute": {
+    "display_name": "Canyon Creek Post Acute",
+    "display_names": [
+      "Canyon Creek Post Acute"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-02-25. Add overrides manually."
+  },
+  "bellaken_skilled_nursing_center_snf": {
+    "display_name": "Bellaken Skilled Nursing Center - SNF",
+    "display_names": [
+      "Bellaken Skilled Nursing Center - SNF"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-02-25. Add overrides manually."
+  },
+  "alameda": {
+    "display_name": "Alameda",
+    "display_names": [
+      "Alameda"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "santa_rita_jail": {
+    "display_name": "Santa Rita Jail",
+    "display_names": [
+      "Santa Rita Jail"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "fruitvale_healthcare_center": {
+    "display_name": "Fruitvale Healthcare Center",
+    "display_names": [
+      "Fruitvale Healthcare Center"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "greenfield_care_center_of_fairfield": {
+    "display_name": "Greenfield Care Center of Fairfield",
+    "display_names": [
+      "Greenfield Care Center of Fairfield"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "herman_health_care_center": {
+    "display_name": "Herman Health Care Center",
+    "display_names": [
+      "Herman Health Care Center"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "concord_post_acute": {
+    "display_name": "Concord Post Acute",
+    "display_names": [
+      "Concord Post Acute"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "4001_lone_tree_way": {
+    "display_name": "4001 Lone Tree Way",
+    "display_names": [
+      "4001 Lone Tree Way"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "alta_bates_summit_medical_center": {
+    "display_name": "Alta Bates Summit Medical Center",
+    "display_names": [
+      "Alta Bates Summit Medical Center"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "san_pablo_healthcare_wellness_center": {
+    "display_name": "San Pablo Healthcare & Wellness Center",
+    "display_names": [
+      "San Pablo Healthcare & Wellness Center"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "lake_park_healthcare_center": {
+    "display_name": "Lake Park Healthcare Center",
+    "display_names": [
+      "Lake Park Healthcare Center"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "jones_convalescent_hospital": {
+    "display_name": "Jones Convalescent Hospital",
+    "display_names": [
+      "Jones Convalescent Hospital"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "san_leandro_healthcare_center_inc": {
+    "display_name": "San Leandro HealthCare Center, Inc.",
+    "display_names": [
+      "San Leandro HealthCare Center, Inc."
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "lone_tree_post_acute": {
+    "display_name": "Lone Tree Post Acute",
+    "display_names": [
+      "Lone Tree Post Acute"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "fallbrook_mhrc": {
+    "display_name": "Fallbrook MHRC",
+    "display_names": [
+      "Fallbrook MHRC"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "angwin_mhrc": {
+    "display_name": "Angwin MHRC",
+    "display_names": [
+      "Angwin MHRC"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "angwin_nh_rc": {
+    "display_name": "ANGWIN NH-RC",
+    "display_names": [
+      "ANGWIN NH-RC"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "fairfield_post_acute_rehab": {
+    "display_name": "Fairfield Post-Acute Rehab",
+    "display_names": [
+      "Fairfield Post-Acute Rehab"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "bancroft_healthcare_center_snf": {
+    "display_name": "Bancroft Healthcare Center - SNF",
+    "display_names": [
+      "Bancroft Healthcare Center - SNF"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "greenspring_post_acute": {
+    "display_name": "Greenspring Post-Acute",
+    "display_names": [
+      "Greenspring Post-Acute"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "antioch_medical_center": {
+    "display_name": "Antioch Medical Center",
+    "display_names": [
+      "Antioch Medical Center"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "san_jose_mhrc": {
+    "display_name": "San Jose MHRC",
+    "display_names": [
+      "San Jose MHRC"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "sutter_health": {
+    "display_name": "Sutter Health",
+    "display_names": [
+      "Sutter Health"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "delta_view_post_acute": {
+    "display_name": "Delta View Post Acute",
+    "display_names": [
+      "Delta View Post Acute"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "sutter_health_eden_medical_center": {
+    "display_name": "Sutter Health Eden Medical Center",
+    "display_names": [
+      "Sutter Health Eden Medical Center"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "east_bay_post_acute": {
+    "display_name": "East Bay Post Acute",
+    "display_names": [
+      "East Bay Post Acute"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "woodland_park_acute": {
+    "display_name": "Woodland Park Acute",
+    "display_names": [
+      "Woodland Park Acute"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  },
+  "residential_facility": {
+    "display_name": "RESIDENTIAL FACILITY",
+    "display_names": [
+      "RESIDENTIAL FACILITY"
+    ],
+    "auto_detected": true,
+    "overrides": [],
+    "notes": "Auto-detected on 2026-03-23. Add overrides manually."
+  }
+}

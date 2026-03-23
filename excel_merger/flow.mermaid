@@ -1,0 +1,21 @@
+flowchart TD
+    A[Multiple Excel files in folder] --> B[Tool reads all .xlsx files]
+    B --> C{Check each file's headers}
+    C -->|Valid headers| D[Add to merge list]
+    C -->|Invalid headers| E[Skip file<br/>Report reason]
+    
+    D --> F[Combine all valid files]
+    F --> G[Add source_file column<br/>showing original filename]
+    G --> H[Format master file]
+    H --> I[Bold headers<br/>Auto-size columns<br/>Freeze top row]
+    I --> J[Save master Excel file]
+    
+    E --> K[Print report]
+    J --> K
+    K --> L[Shows merged files<br/>skipped files<br/>total rows]
+    
+    style A fill:#4A90D9,color:#fff
+    style D fill:#3AAE6E,color:#fff
+    style E fill:#E8913A,color:#fff
+    style J fill:#3AAE6E,color:#fff
+    style L fill:#7B68EE,color:#fff
