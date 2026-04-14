@@ -6,7 +6,7 @@ This repository contains three standalone automation tools for medical document 
 
 1. **[Document Processor](document_processor/)** - AI-powered extraction of patient data from PDF/image facesheets
 2. **[Excel Merger](excel_merger/)** - Combines multiple Excel files into one master file
-3. **[Call Reconciler](call_reconciler/)** - Matches failed phone calls against master Excel sheet
+3. **[Call Reconciler](call_reconciler/)** - Matches a subsheet of phones to a master Excel and outputs full master rows
 
 ---
 
@@ -86,7 +86,7 @@ See [excel_merger/README.md](excel_merger/README.md) for complete details.
 
 ## 3. Call Reconciler
 
-**What it does:** Matches failed phone calls against a master Excel sheet and outputs full patient records for matched numbers.
+**What it does:** Matches a **subsheet** (phone list) to a **master** workbook and writes **full master rows** for every matching phone.
 
 ### Quick Start
 
@@ -100,22 +100,22 @@ python3 call_reconciler/reconcile.py
 Before running, organize your files:
 
 ```
-~/Desktop/ARcallback/
-    Master/        ← Put exactly 1 .xlsx file here
-    Errored/       ← Put exactly 1 .xlsx file here
+~/Desktop/processing/
+    master/        ← Exactly 1 file: .csv, .xlsx, or .xls (column: phone number)
+    subsheet/      ← Exactly 1 file: .csv, .xlsx, or .xls (column: To OR phone number)
 ```
 
 ### Key Features
 
-- **Auto-Detection** - Automatically finds files in fixed locations
-- **Phone Number Matching** - Direct string comparison (both use format `19494360836`)
-- **Full Row Output** - Returns complete patient records from master for all matched calls
+- **Auto-Detection** - Automatically finds the single workbook in each folder
+- **Phone Number Matching** - String comparison (e.g. `19494360836`)
+- **Full Row Output** - Every matching master row, all columns preserved
 - **Professional Formatting** - Bold headers, Arial font, frozen top row, auto-sized columns
 
 ### Output
 
-- Excel file: `~/Desktop/ARcallback/Failed_Calls_Full_{date}.xlsx`
-- Terminal report showing match counts and unmatched numbers
+- Excel file: `~/Desktop/processing/Matched_To_Master_{date}.xlsx` (in the **processing** folder root)
+- Terminal report: matched vs unmatched **distinct** subsheet phones, and output row count
 
 ### Full Documentation
 
@@ -127,9 +127,17 @@ See [call_reconciler/README.md](call_reconciler/README.md) for complete details.
 
 ### Common Dependencies
 
-All tools require:
+Most tools require:
 ```bash
 pip install pandas openpyxl
+```
+
+If your system Python blocks `pip install` (PEP 668 “externally-managed-environment”), use a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install pandas openpyxl
 ```
 
 ### Document Processor Additional Requirements
@@ -159,8 +167,11 @@ cp document_processor/.env.example document_processor/.env
 # Single file
 python document_processor/main.py --input file.pdf --validate --verbose
 
-# Batch folder
-python document_processor/main.py --input folder/ --validate --verbose
+# Batch: all supported files in a folder
+python document_processor/main.py --input-dir folder/ --validate --verbose
+
+# Batch: dated folder with start/ and end/ (recommended)
+python document_processor/main.py --batch-folder ~/Desktop/facesheets/03-23 --validate --verbose
 ```
 
 ### Excel Merger
@@ -170,7 +181,7 @@ python3 excel_merger/merge.py --input ~/Desktop/ExcelFiles/
 
 ### Call Reconciler
 ```bash
-# Setup: Put files in ~/Desktop/ARcallback/Master/ and Errored/
+# Setup: Put files in ~/Desktop/processing/master/ and subsheet/
 python3 call_reconciler/reconcile.py
 ```
 
@@ -192,13 +203,13 @@ python3 call_reconciler/reconcile.py
    ```
    Output: `Master.xlsx` with all merged data
 
-3. **Reconcile failed calls:**
-   - Place master file in `~/Desktop/ARcallback/Master/`
-   - Place failed calls file in `~/Desktop/ARcallback/Errored/`
+3. **Reconcile subsheet to master:**
+   - Place master file in `~/Desktop/processing/master/`
+   - Place subsheet file in `~/Desktop/processing/subsheet/`
    ```bash
    python3 call_reconciler/reconcile.py
    ```
-   Output: `Failed_Calls_Full_{date}.xlsx` with matched records
+   Output: `Matched_To_Master_{date}.xlsx` in `~/Desktop/processing/`
 
 ---
 
@@ -214,8 +225,8 @@ python3 call_reconciler/reconcile.py
 - **Permission errors**: Ensure write access to output directory
 
 ### Call Reconciler Issues
-- **"Must contain exactly 1 .xlsx file"**: Each folder needs exactly one `.xlsx` file
-- **No matches**: Verify phone numbers exist in both files and use same format
+- **"must contain exactly 1 data file"**: Each folder needs exactly one supported file (`.csv`, `.xlsx`, or `.xls`)
+- **No matches**: Verify phone numbers exist in both files and use the same phone format (the tool strips a leading `+`)
 
 ---
 

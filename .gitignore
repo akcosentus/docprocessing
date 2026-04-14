@@ -1,2 +1,8 @@
 .DS_Store
 logs/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.venv-*/
