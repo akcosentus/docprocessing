@@ -1,6 +1,6 @@
 # Call Reconciler
 
-Matches a **subsheet** (subset of phone numbers) to a **master** Excel file and writes **full master rows** for every phone that appears in both.
+Matches a **subsheet** (subset of phone numbers) to a **master** table (CSV/Excel) and writes **full master rows** for every phone that appears in both.
 
 ## Setup
 
@@ -16,7 +16,21 @@ Output is written to the **processing** folder root:
 
 `~/Desktop/processing/Matched_To_Master_YYYY-MM-DD.xlsx`
 
-## Usage
+## Installation
+
+```bash
+pip install pandas openpyxl
+```
+
+If `pip install` is blocked (PEP 668 on some macOS setups), use a venv:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install pandas openpyxl
+```
+
+From the **repository root**:
 
 ```bash
 python3 call_reconciler/reconcile.py
@@ -41,12 +55,6 @@ Phones are matched after normalizing: whitespace trimmed and a leading **`+`** r
 - Each of `master/` and `subsheet/` must contain **exactly one** supported file (`.csv`, `.xlsx`, or `.xls`). Remove extra copies so only one remains per folder.
 - Re-running on the same date **overwrites** `Matched_To_Master_<today>.xlsx`.
 - **Unmatched** subsheet phones are reported in the terminal only (not listed in the Excel file).
-
-## Installation
-
-```bash
-pip install pandas openpyxl
-```
 
 ## Troubleshooting
 

@@ -12,13 +12,21 @@ A simple tool that combines multiple Excel files from a folder into one master f
 
 ## Installation
 
-First, install the required software packages:
+Install dependencies:
 
 ```bash
 pip install pandas openpyxl
 ```
 
-Or if that doesn't work, try:
+If your system Python blocks `pip install` (PEP 668), use a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install pandas openpyxl
+```
+
+Or try:
 
 ```bash
 pip3 install pandas openpyxl

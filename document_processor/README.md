@@ -1,56 +1,118 @@
 # Medical Document Processing Pipeline
 
-A Python-based medical document processing platform for extracting patient demographic data from PDF and image facesheets using GPT-4o vision.
+Extracts patient demographic data from PDF and image facesheets using GPT-4o vision, local OCR, and self-consistency checks.
 
 ## Requirements
 
-- Python 3.11+
-- OpenAI API key with BAA coverage
-- Tesseract OCR (required - OCR always runs)
+- Python 3.11+ (3.10 may work; CI targets 3.11+)
+- OpenAI API key (BAA-covered deployment as required by your org)
+- Tesseract OCR (required — OCR always runs)
 
 ## Installation
 
-1. Install Python dependencies:
+1. Dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
-2. Install Tesseract OCR (required - OCR always runs):
-   - **macOS**: `brew install tesseract`
-   - **Linux (Debian/Ubuntu)**: `apt-get install tesseract-ocr`
-   - **Linux (RHEL/CentOS)**: `yum install tesseract`
-   - **Windows**: Download installer from [GitHub](https://github.com/UB-Mannheim/tesseract/wiki)
+   If `pip install` is blocked (PEP 668 on macOS/Homebrew Python), use a venv:
 
-3. Copy `.env.example` to `.env` and configure:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+2. Tesseract (required):
+
+   - **macOS:** `brew install tesseract`
+   - **Debian/Ubuntu:** `apt-get install tesseract-ocr`
+   - **RHEL/CentOS:** `yum install tesseract`
+   - **Windows:** [UB Mannheim installer](https://github.com/UB-Mannheim/tesseract/wiki)
+
+3. Environment:
+
    ```bash
    cp .env.example .env
-   # Edit .env with your OPENAI_API_KEY
+   # Set OPENAI_API_KEY (and optionally MODEL_SNAPSHOT, OUTPUT_EXCEL, etc.)
    ```
 
 ## Usage
 
+Run from the **repository root** (or `cd document_processor` and use paths below relative to that folder).
+
+You must pass **exactly one** of: `--input`, `--input-dir`, or `--batch-folder`.
+
+### Single file
+
 ```bash
-python main.py --input <file.pdf> --facility <facility_id> [options]
+python document_processor/main.py --input /path/to/facesheet.pdf
 ```
 
-### Options
+### Batch folder (all supported files in that folder, non-recursive)
 
-- `--input`: Path to a single PDF or image file
-- `--input-dir`: Path to a folder of PDF/image files for batch processing
-- `--facility`: Facility ID (required)
-- `--output-dir`: Output directory for JSON files (default: ./output)
-- `--validate`: Run second-pass validation for MEDIUM/LOW confidence results
-- `--output-excel`: Path to Excel workbook for appending results
-- `--force`: Force processing even if file has been processed before
-- `--verbose`: Enable verbose logging
+```bash
+python document_processor/main.py --input-dir /path/to/facesheets/
+```
+
+### Dated batch layout (recommended)
+
+Put PDFs/images in `<date>/start/`. Outputs go to `<date>/end/output/` (JSON, reports) and Excel defaults to `<date>/end/PatientDemographics.xlsx` unless overridden.
+
+```bash
+python document_processor/main.py --batch-folder ~/Desktop/facesheets/03-23 --validate --verbose
+```
+
+### Main options
+
+| Flag | Description |
+|------|-------------|
+| `--input` | Single PDF or image file |
+| `--input-dir` | Folder of PDFs/images (batch) |
+| `--batch-folder` | Folder containing `start/` (inputs) and `end/` (outputs + default Excel path) |
+| `--facility` | Facility ID from `config/facilities.json` (optional — omit for auto-classification) |
+| `--no-classify` | Skip auto-detection; **requires** `--facility` |
+| `--output-dir` | JSON + run reports directory (default `./output`, or `<batch-folder>/end/output` with `--batch-folder`) |
+| `--output-excel` | Workbook to append (default: `OUTPUT_EXCEL` in `.env`, or `~/Desktop/PatientDemographics/PatientDemographics.xlsx`) |
+| `--validate` | Force second-pass validation in addition to the automatic rules below |
+| `--force` | Reprocess even if file fingerprint is already in `processed_files.json` |
+| `--verbose` | DEBUG logging |
+
+### Facility routing
+
+- If **`--facility`** is set, that facility is used and classification is skipped.
+- If **`--facility`** is omitted (default), the tool classifies the first page and matches `config/facilities.json` (including auto-stubs for new names when appropriate).
+- **`--no-classify`** without **`--facility`** exits with an error.
+
+### Validation passes
+
+- **Local validation** (`validator.py`) always runs on the merged result (format checks).
+- **Second-pass LLM validation** runs when you pass **`--validate`**, or when the merged result is MEDIUM/LOW confidence or has conflicts (`should_run_validation_pass`).
+
+### Outputs
+
+- Per-file JSON: `<stem>_<timestamp>.json` under `--output-dir`
+- Run report: `run_report_<timestamp>.json` (metadata, no PHI in structured fields beyond filenames)
+- Idempotency log: `processed_files.json` (content hashes)
+- Excel: new row per file on sheet `Extractions` (color-coded confidence / flags) at `--output-excel`
+
+### Supported input types
+
+See `src/pdf_handler.py`: typically `.pdf`, `.jpg`, `.jpeg`, `.png`, `.tif`, `.tiff`.
 
 ## Features
 
-- **OCR Grounding** (always enabled): Extracts raw text using local Tesseract OCR before sending to GPT-4o, providing a second representation for cross-reference
-- **Self-Consistency Verification** (always enabled): Runs extraction twice independently and compares results field-by-field for improved accuracy
+- **OCR grounding** (always on): Tesseract text is sent with the image for cross-check.
+- **Self-consistency** (always on): two extraction passes per page; disagreements are flagged/nulled per `consistency.py`.
+- **Multi-page**: one row in Excel per document; JSON merges pages.
 
-## HIPAA Compliance
+## HIPAA / data handling notes
 
-- All OpenAI API calls use `store=False` (ZDR requirement)
-- No PHI is logged or written to disk except final output JSON and Excel files
-- All processing is local - no cloud services or external APIs that touch PHI
+- OpenAI calls use `store=False` in code (`extractor.py`).
+- Avoid committing `.env`, `output/`, or logs with PHI. Use `.env.example` only for template keys.
+
+## More help
+
+- Tests: `pytest` from `document_processor/` with dependencies installed.
+- Facility list: `config/facilities.json`.
